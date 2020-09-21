@@ -3,9 +3,9 @@
 실맹방법: 
 Agent
 
-Option             Description
+Option             Description  
 -h, --host         host to transfer (ex, 1.2.3.4:5)  
--p, --path <Path>  file path to transfer
+-p, --path <Path>  file path to transfer  
   
   
   
