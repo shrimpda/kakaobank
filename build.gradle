@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    dependencies {
+        compile 'ch.qos.logback:logback-classic:1.2.3'
+        compile 'ch.qos.logback:logback-core:1.2.3'
+        compile 'com.fasterxml.jackson.core:jackson-core:2.8.6'
+        compile 'com.fasterxml.jackson.core:jackson-databind:2.8.6'
+        compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2'
+        compile 'io.netty:netty-all:4.1.52.Final'
+        // Use JUnit test framework
+        testImplementation 'junit:junit:4.12'
+    }
+}
+
+project(':agent') {
+    dependencies {
+        compile project(':common')
+    }
+}
+
+project(':server') {
+    dependencies {
+        compile project(':common')
+        compile 'org.apache.zookeeper:zookeeper:3.6.2'
+        compile 'org.apache.curator:curator-framework:5.1.0'
+        compile 'org.apache.curator:curator-recipes:5.1.0'
+        compile 'io.dropwizard.metrics:metrics-core:4.1.2'
+        compile 'io.dropwizard.metrics:metrics-jvm:4.1.2'
+    }
+}

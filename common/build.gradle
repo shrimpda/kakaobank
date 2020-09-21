@@ -1,0 +1,22 @@
+plugins {
+    id 'java-library'
+}
+
+group 'com.kakaobank'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.bouncycastle:bcprov-jdk15on:1.60'
+    compile 'com.joyent.util:fast-md5:2.7.1'
+}
+
+jar {
+
+    exclude "**/config/**"
+    exclude "**/bin/**"
+}

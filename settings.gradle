@@ -1,0 +1,6 @@
+rootProject.name = 'kakaobank'
+include 'server'
+include 'agent'
+include 'common'
+include 'common'
+

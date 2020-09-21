@@ -1,0 +1,22 @@
+# intellij files
+.idea/
+*.iml
+*.ipr
+*.iws
+build-idea/
+.local-idea-is-configured
+
+# eclipse files
+.project
+.classpath
+.settings
+build-eclipse/
+
+# gradle stuff
+.gradle/
+build/
+out/
+
+# random old stuff that we should look at the necessity of...
+/tmp/
+eclipse-build

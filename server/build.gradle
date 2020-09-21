@@ -1,0 +1,57 @@
+import org.apache.tools.ant.filters.FixCrLfFilter
+
+plugins {
+    id 'java'
+}
+
+group 'com.kakaobank'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.kakaobank.server.Server', 'Class-Path': configurations.runtimeClasspath.files.collect { '../lib/' + it.getName() }.join(' ')
+    }
+    exclude "**/config/**"
+    exclude "**/bin/**"
+}
+
+task buildZip(type: Zip) {
+    with copySpec {
+        with copySpec {
+            into('lib')
+            from configurations.runtime
+            from jar
+        }
+        into('config') {
+            dirMode 0750
+            fileMode 0660
+            with copySpec {
+                from '/src/main/resources/config'
+                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('lf'))
+            }
+        }
+        into('bin') {
+            with copySpec {
+                with copySpec {
+                    from '/src/main/resources/bin'
+                    exclude '*.bat'
+                    filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('lf'))
+                    eachFile {
+                        it.setMode(0755)
+                    }
+                }
+                from('/src/main/resources/bin') {
+                    include '*.bat'
+                    filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+                }
+            }
+        }
+    }
+}
+
+build.dependsOn buildZip

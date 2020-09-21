@@ -1,0 +1,7 @@
+node.name: test
+transport.host: localhost
+transport.port: 7001
+encrypt.password: test
+file.repository.path:
+zookeeper.host: localhost:2181
+zookeeper.connection.timeout: 3000
